@@ -8,8 +8,67 @@ async function generateGraffiti(wordsToWrite: string): Promise<string> {
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 
-	// Generate HTML content for graffiti
-	const html = `<html><body><div style="font-family: 'DonGraffiti'; background-color: black; color: white; width: 1024px; height: 536px; display: flex; justify-content: center; align-items: center;">${wordsToWrite}</div></body></html>`;
+	const neonColors = ["#ff00ff", "#00ffff", "#ffff00", "#ff0000", "#00ff00"];
+	const width = 600;
+	const height = Math.round(width / 1.91); // Compute height based on aspect ratio
+
+	// Generate spans for each letter with different neon colors
+	const coloredWords = wordsToWrite
+		.split("")
+		.map((char) => {
+			const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+			return `<span style="color:${color};">${char}</span>`;
+		})
+		.join("");
+
+	const fontSize = "100px";
+
+	const html = `
+	<html>
+	<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+	  <style>
+		body, html {
+		  margin: 0;
+		  padding: 0;
+		  overflow: hidden; 
+		  height: 100%; 
+		}
+		#graffiti {
+		  position: absolute; /* Positions the div at the top-left corner */
+		  top: 0;
+		  left: 0;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: ${width}px;
+		  height: ${height}px;
+		  background-color: black;
+		  font-size: ${fontSize};
+		  font-family: "Honk", system-ui;
+		  font-optical-sizing: auto;
+			font-weight: 400;
+			font-style: normal;
+			font-variation-settings:
+				"MORF" 15,
+				"SHLN" 50;
+		  color: white;
+		  flex-wrap: wrap;
+		}
+	  </style>
+
+	  </head>
+	<body>
+	  <div id="graffiti">
+		${coloredWords}
+	  </div>
+	</body>
+	</html>`;
+
+	// Set the page dimensions
+	await page.setViewport({ width: width, height: height });
 
 	// Set page content to your generated HTML
 	await page.setContent(html);
