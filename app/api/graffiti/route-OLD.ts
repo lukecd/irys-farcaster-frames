@@ -1,21 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import { createCanvas, registerFont, loadImage } from "node-canvas";
 import Irys from "@irys/sdk";
 import path from "path";
 
 async function generateGraffiti(wordsToWrite: string): Promise<string> {
-	// Launch puppeteer browser
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
+	// Define canvas size and aspect ratio
+	const width = 1024;
+	const height = Math.round(width / 1.91);
+	const canvas = createCanvas(width, height);
+	const context = canvas.getContext("2d");
 
-	// Generate HTML content for graffiti
-	const html = `<html><body><div style="font-family: 'DonGraffiti'; background-color: black; color: white; width: 1024px; height: 536px; display: flex; justify-content: center; align-items: center;">${wordsToWrite}</div></body></html>`;
+	// Set background color
+	context.fillStyle = "#000000"; // black background
+	context.fillRect(0, 0, width, height);
 
-	// Set page content to your generated HTML
-	await page.setContent(html);
+	const fontPath = path.join(process.cwd(), "./public/fonts/", "DonGraffiti.otf");
+	registerFont(fontPath, { family: "DonGraffiti" });
+	context.font = '100px "DonGraffiti"';
+	context.textAlign = "center";
+	context.textBaseline = "middle";
 
-	// Take a screenshot
-	const buffer = await page.screenshot({ type: "png" });
+	// Color palette
+	const neonColors = ["#ff00ff", "#00ffff", "#ffff00", "#ff0000", "#00ff00"];
+
+	// Split text to color each character
+	const chars = wordsToWrite.split("");
+	const xOffset = width / chars.length;
+
+	chars.forEach((char, index) => {
+		// Apply color for each character
+		const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+		context.fillStyle = color;
+		context.fillText(char, xOffset * index + xOffset / 2, height / 2);
+	});
+
+	// Convert canvas to Buffer
+	const buffer = canvas.toBuffer("image/png");
 
 	// Connect to Irys
 	const key = process.env.PRIVATE_KEY;
