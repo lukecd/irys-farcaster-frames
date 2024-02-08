@@ -10,7 +10,7 @@ const frameMetadata = getFrameMetadata({
 	image: `${process.env.NEXT_PUBLIC_BASE_URL}/llama-graffiti.png`,
 	post_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graffiti?word=yoyoyo`,
 	input: {
-		text: "Graffiit it up",
+		text: "Graffit it up",
 	},
 });
 

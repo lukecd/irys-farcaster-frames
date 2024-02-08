@@ -11,9 +11,8 @@
 	"dependencies": {
 		"@coinbase/onchainkit": "^0.5.0",
 		"@irys/sdk": "^0.1.6",
-		"@napi-rs/canvas": "^0.1.45",
 		"next": "14.1.0",
-		"puppeteer": "^22.0.0",
+		"pureimage": "^0.4.13",
 		"react": "^18",
 		"react-dom": "^18"
 	},
