@@ -4,23 +4,21 @@ import type { Metadata } from "next";
 const frameMetadata = getFrameMetadata({
 	buttons: [
 		{
-			label: "Do it!",
+			label: "Love pineapple on pizza!",
+		},
+		{
+			label: "No way, no how.",
 		},
 	],
-	image: `${process.env.NEXT_PUBLIC_BASE_URL}/llama-graffiti.png`,
-	post_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graffiti?word=yoyoyo`,
-	input: {
-		text: "Graffit it up",
-	},
+	image: `${process.env.NEXT_PUBLIC_BASE_URL}/public/the-battle.png`,
 });
 
 export const metadata: Metadata = {
-	title: "Llama graffiti artist",
-	description: "Llama paints the night, Eternal data in art, Walls whisper always.",
+	title: "Pineapple on pizza",
+	description: "Help us decide, pineapple on pizza? Yah or Nah?",
 	openGraph: {
 		title: "Llamas make the best artists",
 		description: "Llama paints the night, Eternal data in art, Walls whisper always.",
-		// images: [`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/0.png`],
 	},
 	other: {
 		...frameMetadata,

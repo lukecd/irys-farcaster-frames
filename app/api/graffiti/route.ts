@@ -28,19 +28,17 @@ import Irys from "@irys/sdk";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const searchParams = req.nextUrl.searchParams;
+	console.log("searchParams=", searchParams);
 	// Parse our word, or default to "GM" if nothing is given
 	const word: string = searchParams.get("word") || "GM";
 
 	return new NextResponse(`<!DOCTYPE html><html><head>
-    <title>This is your graffiti</title>
+    <title>This is your tx</title>
     <meta property="fc:frame" content="vNext" />
 	
-	<meta property="fc:frame:image" content="https://gateway.irys.xyz/I-eKypa-vKnzUnNM6YFdnbci664zMoBZitQn04ParbM" />
-	<meta property="fc:frame:input:text" content="public:x2dVQryQru...loCaIEH_bc" />
-	<meta property="fc:frame:input:text" content="version:1.0.0" />
-	<meta property="fc:frame:input:text" content="id:2RQXLiHrvd...hdaQAP67QE" />
-	<meta property="fc:frame:input:text" content="timestamp:1707390869133" />
-    <meta property="fc:frame:button:1" content="Open In New Tab" />
+	<meta property="fc:frame:image" content="${process.env.NEXT_PUBLIC_BASE_URL}/two-pizzas.png" />
+	<meta property="fc:frame:input:text" content="Current score: Pineapple 10 * No Pinapple 5" />
+   <meta property="fc:frame:button:1" content="Open In New Tab" />
     <meta property="fc:frame:button:1:action" content="post_redirect" />
   </head></html>`);
 }
