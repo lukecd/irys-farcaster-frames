@@ -10,15 +10,15 @@ const frameMetadata = getFrameMetadata({
 			label: "No way, no how.",
 		},
 	],
-	image: `${process.env.NEXT_PUBLIC_BASE_URL}/public/the-battle.png`,
+	image: `${process.env.NEXT_PUBLIC_BASE_URL}/the-battle.png`,
 });
 
 export const metadata: Metadata = {
 	title: "Pineapple on pizza",
-	description: "Help us decide, pineapple on pizza? Yah or Nah?",
+	description: "Help us decide, pineapple on pizza? Yah or Nay?",
 	openGraph: {
-		title: "Llamas make the best artists",
-		description: "Llama paints the night, Eternal data in art, Walls whisper always.",
+		title: "Pineapple on pizza",
+		description: "Help us decide, pineapple on pizza? Yah or Nay?",
 	},
 	other: {
 		...frameMetadata,
