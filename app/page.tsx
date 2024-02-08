@@ -11,6 +11,7 @@ const frameMetadata = getFrameMetadata({
 		},
 	],
 	image: `${process.env.NEXT_PUBLIC_BASE_URL}/the-battle.png`,
+	post_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/quiz`,
 });
 
 export const metadata: Metadata = {
